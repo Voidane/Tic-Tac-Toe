@@ -1,5 +1,7 @@
 package voidane.tictactoe.come.Frame;
 
+import voidane.tictactoe.come.Actions.OnPlayerTurn;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,6 +10,8 @@ public class TTTFrame {
     JFrame panel;
     JButton[] slots = new JButton[9];
     JTextPane display;
+    String userTurn = "x";
+    private boolean isWinner;
 
     /**
      * Allows for the class to be extended without creating an extra program
@@ -34,9 +38,11 @@ public class TTTFrame {
     private void createJFrame() {
         panel = new JFrame("Tic Tac Toe");
         panel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panel.getContentPane().setBackground(Color.black);
         panel.setSize(450,450);
         panel.setLayout(null);
         panel.setVisible(true);
+
     }
 
     /**
@@ -45,7 +51,7 @@ public class TTTFrame {
     private void createDisplayText() {
         display = new JTextPane();
         display.setBounds(100,20,220, 55);
-        display.setBackground(Color.BLACK);
+        display.setBackground(Color.ORANGE);
 
         // Use HTML for styled font
         display.setContentType("text/html");
@@ -66,36 +72,54 @@ public class TTTFrame {
         panel.repaint();
     }
 
+    public void setWinnerDisplayText(String winner) {
+        display.setText(
+                """
+                    <html>
+                        <center>
+                            <font size="+5">
+                                Winner!
+                """ +
+                        winner
+                + """           
+                            </font>
+                        </center>
+                    </html>
+                """
+        );
+    }
+
     /**
      * Creates each of the grid slots as buttons for tic-tac-toe for users to use
      */
     private void createSlotButtons(){
 
+
         for ( int i = 0; i < slots.length ; i++ )
+        {
             slots[i] = new JButton();
+            slots[i].setActionCommand("" + i);
+            slots[i].setBackground(Color.WHITE);
+            Font buttonFont = new Font(slots[i].getFont().getName(), slots[i].getFont().getStyle(), 35);
+            slots[i].setFont(buttonFont);
+        }
 
         slots[0].setBounds(100, 100, 70,70);
-        slots[0].setBackground(Color.black);
         slots[1].setBounds(175, 100, 70,70);
-        slots[1].setBackground(Color.black);
         slots[2].setBounds(250, 100, 70,70);
-        slots[2].setBackground(Color.black);
         slots[3].setBounds(100, 175, 70,70);
-        slots[3].setBackground(Color.black);
         slots[4].setBounds(175, 175, 70,70);
-        slots[4].setBackground(Color.black);
         slots[5].setBounds(250, 175, 70,70);
-        slots[5].setBackground(Color.black);
         slots[6].setBounds(100, 250, 70,70);
-        slots[6].setBackground(Color.black);
         slots[7].setBounds(175, 250, 70,70);
-        slots[7].setBackground(Color.black);
         slots[8].setBounds(250, 250, 70,70);
-        slots[8].setBackground(Color.black);
 
+        OnPlayerTurn onPlayerTurn = new OnPlayerTurn(this);
 
-        for (JButton slot : slots)
+        for (JButton slot : slots) {
             panel.add(slot);
+            slot.addActionListener(onPlayerTurn);
+        }
 
         panel.revalidate();
         panel.repaint();
@@ -156,12 +180,27 @@ public class TTTFrame {
 
     /**
      * x = odd, o = even
-     * @param currentTurn the number of turns taken
      * @return x or o
      */
-    public String getUserTurn(int currentTurn) {
-        if (currentTurn % 2 == 1)
+    public String getUserTurn(int turn) {
+        if (turn % 2 == 0)
             return "x";
         return "o";
+    }
+
+    public void setUserTurn(String userTurn) {
+        this.userTurn = userTurn;
+    }
+
+    public String getUserTurnNow() {
+        return this.userTurn;
+    }
+
+    public boolean isWinner() {
+        return this.isWinner;
+    }
+
+    public void setWinner() {
+        this.isWinner = true;
     }
 }
