@@ -1,6 +1,7 @@
-package voidane.tictactoe.come.Frame;
+package voidane.tictactoe.com.Frame;
 
-import voidane.tictactoe.come.Actions.OnPlayerTurn;
+import voidane.tictactoe.com.Actions.OnPlayerTurn;
+import voidane.tictactoe.com.Actions.ResetGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ public class TTTFrame {
     JButton[] slots = new JButton[9];
     JTextPane display;
     String userTurn = "x";
+    JButton reset;
     private boolean isWinner;
 
     /**
@@ -29,7 +31,38 @@ public class TTTFrame {
             createJFrame();
             createSlotButtons();
             createDisplayText();
+            createResetButton();
+            panel.repaint();
         }
+    }
+
+    /**
+     * Creates the reset button
+     */
+    private void createResetButton() {
+        reset = new JButton("RESET");
+        reset.setBounds(165, 350, 90, 30);
+        reset.setBackground(Color.WHITE);
+
+        ResetGame listenerReset = new ResetGame(this);
+        reset.addActionListener(listenerReset);
+
+        panel.add(reset);
+    }
+
+    /**
+     * Resets the game to start another.
+     */
+    public void resetGame() {
+
+        for (JButton slot : slots) {
+            slot.setText("");
+        }
+
+        this.isWinner = false;
+        createDisplayText();
+        System.out.println("Reset the game");
+        panel.repaint();
     }
 
     /**
@@ -99,6 +132,10 @@ public class TTTFrame {
         {
             slots[i] = new JButton();
             slots[i].setActionCommand("" + i);
+
+            // For on reset
+            slots[i].setText("");
+
             slots[i].setBackground(Color.WHITE);
             Font buttonFont = new Font(slots[i].getFont().getName(), slots[i].getFont().getStyle(), 35);
             slots[i].setFont(buttonFont);

@@ -1,7 +1,7 @@
-package voidane.tictactoe.come.Actions;
+package voidane.tictactoe.com.Actions;
 
-import voidane.tictactoe.come.CheckIfWinner;
-import voidane.tictactoe.come.Frame.TTTFrame;
+import voidane.tictactoe.com.CheckIfWinner;
+import voidane.tictactoe.com.Frame.TTTFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

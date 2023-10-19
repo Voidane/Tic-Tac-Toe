@@ -1,6 +1,6 @@
-package voidane.tictactoe.come;
+package voidane.tictactoe.com;
 
-import voidane.tictactoe.come.Frame.TTTFrame;
+import voidane.tictactoe.com.Frame.TTTFrame;
 
 public class TTTMain {
 

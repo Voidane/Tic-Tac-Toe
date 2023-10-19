@@ -1,7 +1,7 @@
-package voidane.tictactoe.come;
+package voidane.tictactoe.com;
 
-import voidane.tictactoe.come.Actions.OnPlayerTurn;
-import voidane.tictactoe.come.Frame.TTTFrame;
+import voidane.tictactoe.com.Actions.OnPlayerTurn;
+import voidane.tictactoe.com.Frame.TTTFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
