@@ -15,13 +15,6 @@ public class TTTFrame {
     JButton reset;
     private boolean isWinner;
 
-    /**
-     * Allows for the class to be extended without creating an extra program
-     */
-    public TTTFrame() {
-
-    }
-
     /***
      * Creates the GUI window.
      * @param createFrane: true when we want to create a window program for tic-tac-toe
@@ -32,6 +25,8 @@ public class TTTFrame {
             createSlotButtons();
             createDisplayText();
             createResetButton();
+
+            // Fix any background and text for buttons or fields.
             panel.repaint();
         }
     }
@@ -43,10 +38,8 @@ public class TTTFrame {
         reset = new JButton("RESET");
         reset.setBounds(165, 350, 90, 30);
         reset.setBackground(Color.WHITE);
-
         ResetGame listenerReset = new ResetGame(this);
         reset.addActionListener(listenerReset);
-
         panel.add(reset);
     }
 
@@ -75,7 +68,6 @@ public class TTTFrame {
         panel.setSize(450,450);
         panel.setLayout(null);
         panel.setVisible(true);
-
     }
 
     /**
@@ -88,6 +80,7 @@ public class TTTFrame {
 
         // Use HTML for styled font
         display.setContentType("text/html");
+
         display.setText("""
                 <html>
                     <center>
@@ -105,6 +98,10 @@ public class TTTFrame {
         panel.repaint();
     }
 
+    /**
+     * Sets the winner inside the display text box.
+     * @param winner the user that won.
+     */
     public void setWinnerDisplayText(String winner) {
         display.setText(
                 """

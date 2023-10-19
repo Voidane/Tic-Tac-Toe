@@ -14,6 +14,10 @@ public class ResetGame implements ActionListener {
     }
 
 
+    /**
+     * Resets the game when [reset] is pressed.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         frame.resetGame();

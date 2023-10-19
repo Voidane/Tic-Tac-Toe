@@ -31,6 +31,11 @@ public class CheckIfWinner {
         }
     }
 
+    /**
+     * Gets all rows and checks columns to see if anyone has won from there.
+     * @param playedTurn the space the player played into
+     * @return true if it's a win and false if not
+     */
     private boolean checkRows(int playedTurn) {
 
         JButton[] gridList = frame.getAllButtonGridList();
@@ -58,6 +63,11 @@ public class CheckIfWinner {
         return CheckIfNull(slot);
     }
 
+    /**
+     * Gets all columns and checks rows to see if anyone has won from there.
+     * @param playedTurn the space the player played into
+     * @return true if it's a win and false if not
+     */
     private boolean checkColumns(int playedTurn) {
         JButton[] gridList = frame.getAllButtonGridList();
         String[] slot = new String[3];
@@ -84,6 +94,11 @@ public class CheckIfWinner {
         return CheckIfNull(slot);
     }
 
+    /**
+     * Gets all diagonals to see if any crosses have won.
+     * @param playedTurn the space the player played into
+     * @return true if it's a win and false if not
+     */
     private boolean checkDiagonals(int playedTurn) {
         JButton[] gridList = frame.getAllButtonGridList();
         String[] slot = new String[3];

@@ -21,12 +21,14 @@ public class OnPlayerTurn implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        // If there is a winner do not perform anymore actions.
         if (frame.isWinner())
             return;
 
         userTurn = frame.getUserTurn(turn);
         JButton button = frame.getButtonGridList(Integer.parseInt(e.getActionCommand()));
 
+        // If the button already has text, then it must of been used.
         if (!button.getText().isEmpty()) {
             return;
         }
@@ -34,6 +36,7 @@ public class OnPlayerTurn implements ActionListener {
         frame.setUserTurnDisplayText(userTurn);
         frame.setUserTurn(userTurn);
 
+        // Have to swap x and o because selecting doesn't mean it's still that players turn
         if (Objects.equals(userTurn, "x"))
             this.userTurn = "o";
         else
@@ -41,7 +44,7 @@ public class OnPlayerTurn implements ActionListener {
 
         button.setText(userTurn);
 
-        CheckIfWinner winner = new CheckIfWinner(frame, e);
+        new CheckIfWinner(frame, e);
         turn++;
     }
 
